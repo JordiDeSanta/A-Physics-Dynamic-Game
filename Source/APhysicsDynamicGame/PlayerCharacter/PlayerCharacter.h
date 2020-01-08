@@ -6,9 +6,6 @@
 #include "GameFramework/Character.h"
 #include "PlayerCharacter.generated.h"
 
-DECLARE_MULTICAST_DELEGATE(FShootGrapple);
-DECLARE_MULTICAST_DELEGATE(FResetGrapple);
-
 UCLASS()
 class APHYSICSDYNAMICGAME_API APlayerCharacter : public ACharacter
 {
@@ -21,13 +18,9 @@ public:
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
-
-	/// Events
-
-	FShootGrapple ShootGrapple;
-	FResetGrapple ResetGrapple;
-
 public:	
+
+	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
@@ -39,8 +32,8 @@ public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Camera", meta = (AllowPrivateAccess = "true"))
 		class UCameraComponent* FirstPersonCameraComponent;
 
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "GrappleGun")
-		class UCableComponent* GrappleCable;
+	UFUNCTION()
+		UCameraComponent* GetCamera();
 
 	/// Input
 
@@ -75,5 +68,5 @@ public:
 	void StopCrouch();
 
 	/** Shoots and resets grapple cable and add impulse to character*/
-	void Grapple();
+	void ShootGrapple();
 };

@@ -4,8 +4,8 @@
 #include "PlayerCharacter.h"
 #include "Components/InputComponent.h"
 #include "Components/CapsuleComponent.h"
-#include "CableComponent.h"
 #include "Camera/CameraComponent.h"
+#include "GrappleComponent.h"
 
 // Sets default values
 APlayerCharacter::APlayerCharacter()
@@ -26,8 +26,6 @@ APlayerCharacter::APlayerCharacter()
 	FirstPersonCameraComponent->RelativeLocation = FVector(-39.56f, 1.75f, 64.f); // Position the camera
 	FirstPersonCameraComponent->bUsePawnControlRotation = true;
 
-	// Create a CableComponent
-	GrappleCable = CreateDefaultSubobject<UCableComponent>(TEXT("GrappleCable"));
 };
 
 // Called when the game starts or when spawned
@@ -73,7 +71,12 @@ void APlayerCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCom
 	PlayerInputComponent->BindAxis("LookUpRate", this, &APlayerCharacter::LookUpAtRate);
 
 	// Bind shoot
-	PlayerInputComponent->BindAction("ShootGrapple", IE_Pressed, this, &APlayerCharacter::Grapple);
+	PlayerInputComponent->BindAction("ShootGrapple", IE_Pressed, this, &APlayerCharacter::ShootGrapple);
+}
+
+UCameraComponent* APlayerCharacter::GetCamera()
+{
+	return FirstPersonCameraComponent;
 }
 
 void APlayerCharacter::MoveForward(float Value)
@@ -114,10 +117,13 @@ void APlayerCharacter::Crouch()
 void APlayerCharacter::StopCrouch()
 {
 	GetCapsuleComponent()->SetCapsuleHalfHeight(96.f);
-};
+}
 
-void APlayerCharacter::Grapple()
+void APlayerCharacter::ShootGrapple()
 {
+	auto GrappleComponent = FindComponentByClass<UGrappleComponent>();
 
-};
+	GrappleComponent->ShootGrapple();
+}
+
 

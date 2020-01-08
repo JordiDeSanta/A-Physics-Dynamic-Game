@@ -18,6 +18,8 @@ public:
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
+
+	void AttachToWall(int Direction, float WallSpeed, FHitResult HitResult);
 public:	
 
 	
@@ -34,6 +36,14 @@ public:
 
 	UFUNCTION()
 		UCameraComponent* GetCamera();
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = WallRun)
+		float WallRunSpeed;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = WallRun)
+		float PlayerToWallDistance;
+
+
 
 	/// Input
 

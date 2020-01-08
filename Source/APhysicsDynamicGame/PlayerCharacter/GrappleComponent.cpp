@@ -61,6 +61,8 @@ void UGrappleComponent::ShootGrapple()
 
 	auto LaunchVelocity = (HookPos - StartGrapple) * GrappleVelocityMultiplier;
 
+	bCanShoot = false;
+
 	Owner->LaunchCharacter(LaunchVelocity, true, true);
 
 	UE_LOG(LogTemp, Warning, TEXT("Launched"));
@@ -71,6 +73,7 @@ void UGrappleComponent::ShootGrapple()
 
 void UGrappleComponent::OnTimerEnd()
 {
+	bCanShoot = true;
 	ResetGrappleEvent.Broadcast();
 };
 

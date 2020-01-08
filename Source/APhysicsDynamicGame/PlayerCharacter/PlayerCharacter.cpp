@@ -6,6 +6,10 @@
 #include "Components/CapsuleComponent.h"
 #include "Camera/CameraComponent.h"
 #include "GrappleComponent.h"
+#include "GameFramework/CharacterMovementComponent.h"
+
+#define LEFT -90
+#define RIGHT 90
 
 // Sets default values
 APlayerCharacter::APlayerCharacter()
@@ -32,15 +36,16 @@ APlayerCharacter::APlayerCharacter()
 void APlayerCharacter::BeginPlay()
 {
 	Super::BeginPlay();
-	
+	for (float i = 0; i < 3; i++)
+	{
+		UE_LOG(LogTemp, Warning, TEXT("Yai"));
+	}
 }
 
-// Called every frame
-void APlayerCharacter::Tick(float DeltaTime)
+void APlayerCharacter::Tick(float DeltaSeconds)
 {
-	Super::Tick(DeltaTime);
-
-}
+	Super::Tick(DeltaSeconds);
+};
 
 // Called to bind functionality to input
 void APlayerCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)

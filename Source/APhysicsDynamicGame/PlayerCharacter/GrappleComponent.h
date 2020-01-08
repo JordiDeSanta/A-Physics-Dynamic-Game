@@ -52,5 +52,7 @@ public:
 	UPROPERTY(BlueprintReadOnly, Category = "Grapple")
 		FVector HookPos;
 
+	bool bCanShoot = true;
+
 
 };

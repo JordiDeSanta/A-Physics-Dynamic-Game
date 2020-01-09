@@ -19,10 +19,7 @@ protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
-	void AttachToWall(int Direction, float WallSpeed, FHitResult HitResult);
 public:	
-
-	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
@@ -37,14 +34,6 @@ public:
 	UFUNCTION()
 		UCameraComponent* GetCamera();
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = WallRun)
-		float WallRunSpeed;
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = WallRun)
-		float PlayerToWallDistance;
-
-
-
 	/// Input
 
 	/** Base turn rate, in deg/sec. Other scaling may affect final turn rate. */
@@ -55,12 +44,16 @@ public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Camera")
 		float BaseLookUpRate;
 
+	/// Movement Actions
+
 	/** Handles moving forward/backward */
 	void MoveForward(float Val);
 
 	/** Handles stafing movement, left and right */
 	void MoveRight(float Val);
 
+	/// Mouse Axis
+	
 	/**
 	 * Called via input to turn at a given rate.
 	 * @param Rate	This is a normalized rate, i.e. 1.0 means 100% of desired turn rate
@@ -73,10 +66,16 @@ public:
 	 */
 	void LookUpAtRate(float Rate);
 
+	/// Crouch
+
 	/** Crouch through capsule half height disminution*/
 	void Crouch();
 	void StopCrouch();
 
+	/// Grapple
+
 	/** Shoots and resets grapple cable and add impulse to character*/
 	void ShootGrapple();
+
+	
 };

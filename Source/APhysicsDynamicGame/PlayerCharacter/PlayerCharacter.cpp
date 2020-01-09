@@ -7,9 +7,8 @@
 #include "Camera/CameraComponent.h"
 #include "GrappleComponent.h"
 #include "GameFramework/CharacterMovementComponent.h"
-
-#define LEFT -90
-#define RIGHT 90
+#include "GameFramework/PlayerController.h"
+#include "Components/PrimitiveComponent.h"
 
 // Sets default values
 APlayerCharacter::APlayerCharacter()
@@ -29,17 +28,14 @@ APlayerCharacter::APlayerCharacter()
 	FirstPersonCameraComponent->SetupAttachment(GetCapsuleComponent());
 	FirstPersonCameraComponent->RelativeLocation = FVector(-39.56f, 1.75f, 64.f); // Position the camera
 	FirstPersonCameraComponent->bUsePawnControlRotation = true;
-
 };
 
 // Called when the game starts or when spawned
 void APlayerCharacter::BeginPlay()
 {
 	Super::BeginPlay();
-	for (float i = 0; i < 3; i++)
-	{
-		UE_LOG(LogTemp, Warning, TEXT("Yai"));
-	}
+	
+	
 }
 
 void APlayerCharacter::Tick(float DeltaSeconds)
@@ -127,8 +123,6 @@ void APlayerCharacter::StopCrouch()
 void APlayerCharacter::ShootGrapple()
 {
 	auto GrappleComponent = FindComponentByClass<UGrappleComponent>();
-
 	GrappleComponent->ShootGrapple();
 }
-
 

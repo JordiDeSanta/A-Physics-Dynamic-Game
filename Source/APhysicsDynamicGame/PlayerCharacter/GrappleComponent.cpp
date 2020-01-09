@@ -34,14 +34,14 @@ void UGrappleComponent::BeginPlay()
 void UGrappleComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
-
+	
 	// ...
 }
 
 void UGrappleComponent::ShootGrapple()
 {
 	auto Owner = Cast<APlayerCharacter>(GetOwner());
-	auto StartGrapple = Owner->GetActorLocation();
+	auto StartGrapple = GetSocketLocation("GrappleSocket");
 	auto MaxGrapple = Owner->GetCamera()->GetForwardVector() * Reach;
 	FHitResult GrappleHitResult;
 

@@ -3,7 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "Components/ActorComponent.h"
+#include "Components/StaticMeshComponent.h"
 #include "GrappleComponent.generated.h"
 
 
@@ -11,7 +11,7 @@ DECLARE_DYNAMIC_MULTICAST_DELEGATE(FShootGrapple);
 DECLARE_DYNAMIC_MULTICAST_DELEGATE(FResetGrapple);
 
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
-class APHYSICSDYNAMICGAME_API UGrappleComponent : public UActorComponent
+class APHYSICSDYNAMICGAME_API UGrappleComponent : public UStaticMeshComponent
 {
 	GENERATED_BODY()
 

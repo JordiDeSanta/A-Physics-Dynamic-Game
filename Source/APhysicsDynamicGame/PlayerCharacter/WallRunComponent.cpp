@@ -11,6 +11,7 @@
 
 UWallRunComponent::UWallRunComponent()
 {
+	// initializating capsule to overlap and collision presets
 	InitCapsuleSize(60.f, 100.f);
 	SetCollisionEnabled(ECollisionEnabled::QueryOnly);
 	SetGenerateOverlapEvents(true);
@@ -19,6 +20,7 @@ UWallRunComponent::UWallRunComponent()
 	SetCollisionResponseToAllChannels(ECollisionResponse::ECR_Overlap);
 	SetNotifyRigidBodyCollision(true);
 
+	// Tracking overlap events
 	OnComponentBeginOverlap.AddDynamic(this, &UWallRunComponent::OnOverlapBegin);
 	OnComponentEndOverlap.AddDynamic(this, &UWallRunComponent::OnOverlapEnd);
 }

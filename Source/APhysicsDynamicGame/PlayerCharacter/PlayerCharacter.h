@@ -31,6 +31,9 @@ public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Camera", meta = (AllowPrivateAccess = "true"))
 		class UCameraComponent* FirstPersonCameraComponent;
 
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Grapple", meta = (AllowPrivateAccess = "true"))
+		class UGrappleComponent* Grapple;
+
 	UFUNCTION()
 		UCameraComponent* GetCamera();
 
@@ -76,6 +79,6 @@ public:
 
 	/** Shoots and resets grapple cable and add impulse to character*/
 	void ShootGrapple();
-
+	void ShootLaser();
 	
 };

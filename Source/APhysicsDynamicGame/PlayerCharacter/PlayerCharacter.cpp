@@ -28,6 +28,10 @@ APlayerCharacter::APlayerCharacter()
 	FirstPersonCameraComponent->SetupAttachment(GetCapsuleComponent());
 	FirstPersonCameraComponent->RelativeLocation = FVector(-39.56f, 1.75f, 64.f); // Position the camera
 	FirstPersonCameraComponent->bUsePawnControlRotation = true;
+
+	// Create a GrappleComponent
+	Grapple = CreateDefaultSubobject<UGrappleComponent>(TEXT("Grapple"));
+	Grapple->AttachToComponent(FirstPersonCameraComponent, FAttachmentTransformRules::SnapToTargetIncludingScale);
 };
 
 // Called when the game starts or when spawned
@@ -71,8 +75,9 @@ void APlayerCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCom
 	PlayerInputComponent->BindAxis("LookUp", this, &APawn::AddControllerPitchInput);
 	PlayerInputComponent->BindAxis("LookUpRate", this, &APlayerCharacter::LookUpAtRate);
 
-	// Bind shoot
+	// Bind grapple actions
 	PlayerInputComponent->BindAction("ShootGrapple", IE_Pressed, this, &APlayerCharacter::ShootGrapple);
+	PlayerInputComponent->BindAction("ShootLaser", IE_Pressed, this, &APlayerCharacter::ShootLaser);
 }
 
 UCameraComponent* APlayerCharacter::GetCamera()
@@ -112,17 +117,23 @@ void APlayerCharacter::LookUpAtRate(float Rate)
 
 void APlayerCharacter::Crouch()
 {
+	GetCharacterMovement()->Crouch();
 	GetCapsuleComponent()->SetCapsuleHalfHeight(48.f);
 };
 
 void APlayerCharacter::StopCrouch()
 {
+	GetCharacterMovement()->UnCrouch();
 	GetCapsuleComponent()->SetCapsuleHalfHeight(96.f);
 }
 
 void APlayerCharacter::ShootGrapple()
 {
-	auto GrappleComponent = FindComponentByClass<UGrappleComponent>();
-	GrappleComponent->ShootGrapple();
+	Grapple->ShootGrapple();
+}
+
+void APlayerCharacter::ShootLaser()
+{
+	Grapple->ShootLaser();
 }
 

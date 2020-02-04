@@ -27,6 +27,9 @@ public:
 	// Called every frame
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "GrappleGun")
+	TSubclassOf<class ALaserProjectile> LaserProjectileBlueprint = nullptr;
+
 	/// Events
 	UPROPERTY(BlueprintAssignable)
 		FShootGrapple ShootGrappleEvent;
@@ -37,22 +40,24 @@ public:
 	FTimerHandle GrappleTimer;
 
 	UFUNCTION()
+		void ShootLaser();
+
+	UFUNCTION()
 		void OnTimerEnd();
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Grapple")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "GrappleGun")
 		float GrappleVelocityMultiplier = 1.f;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Grapple")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "GrappleGun")
 		float Reach = 10000.f;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "GrappleGun")
+		bool bCanShoot = true;
 
 	/** Shoots and resets grapple cable and add impulse to character*/
 	UFUNCTION()
 	void ShootGrapple();
 
-	UPROPERTY(BlueprintReadOnly, Category = "Grapple")
+	UPROPERTY(BlueprintReadOnly, Category = "GrappleGun")
 		FVector HookPos;
-
-	bool bCanShoot = true;
-
-
 };

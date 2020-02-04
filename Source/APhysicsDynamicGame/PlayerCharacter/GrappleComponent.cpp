@@ -6,6 +6,7 @@
 #include "Engine/World.h"
 #include "Camera/CameraComponent.h"
 #include "TimerManager.h"
+#include "LaserProjectile.h"
 
 #define OUT
 
@@ -55,25 +56,37 @@ void UGrappleComponent::ShootGrapple()
 	auto bGrappelled = GrappleHitResult.bBlockingHit;
 	HookPos = GrappleHitResult.Location;
 
+	if (!bCanShoot) { return; };
+
 	ShootGrappleEvent.Broadcast();
 
 	if (!bGrappelled) { ResetGrappleEvent.Broadcast(); return; };
 
 	auto LaunchVelocity = (HookPos - StartGrapple) * GrappleVelocityMultiplier;
 
-	bCanShoot = false;
-
 	Owner->LaunchCharacter(LaunchVelocity, true, true);
 
 	UE_LOG(LogTemp, Warning, TEXT("Launched"));
 
-	GetWorld()->GetTimerManager().SetTimer(GrappleTimer, this, &UGrappleComponent::OnTimerEnd, 0.5, false);
+	GetWorld()->GetTimerManager().SetTimer(GrappleTimer, this, &UGrappleComponent::OnTimerEnd, 0.2, false);
+
+	bCanShoot = false;
 };
 
+void UGrappleComponent::ShootLaser()
+{
+	auto ShootLocation = GetSocketLocation("ShootSocket");
+	auto ShootRotation = GetSocketRotation("ShootSocket");
+
+	GetWorld()->SpawnActor<ALaserProjectile>(
+			LaserProjectileBlueprint,
+			ShootLocation,
+			ShootRotation
+			);
+}
 
 void UGrappleComponent::OnTimerEnd()
 {
-	bCanShoot = true;
 	ResetGrappleEvent.Broadcast();
 };
 

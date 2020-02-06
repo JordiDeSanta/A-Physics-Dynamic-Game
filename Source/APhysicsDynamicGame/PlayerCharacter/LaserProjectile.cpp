@@ -4,7 +4,6 @@
 #include "LaserProjectile.h"
 #include "Components/BoxComponent.h"
 #include "GameFramework/ProjectileMovementComponent.h"
-#include "Kismet/GameplayStatics.h"
 
 // Sets default values
 ALaserProjectile::ALaserProjectile()
@@ -30,9 +29,6 @@ void ALaserProjectile::OnHit(UPrimitiveComponent * HitComp, AActor * OtherActor,
 	// Only add impulse and destroy projectile if we hit a physics
 	if ((OtherActor != NULL) && (OtherActor != this) && (OtherComp != NULL) && OtherComp->IsSimulatingPhysics())
 	{
-		// Applying damage to enemy.
-		UGameplayStatics::ApplyDamage(OtherActor, Damage, this->GetInstigatorController(), this, nullptr);
-
 		Destroy();
 	}
 };

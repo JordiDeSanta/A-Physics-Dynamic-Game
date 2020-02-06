@@ -4,6 +4,9 @@
 #include "ZombieEnemy.h"
 #include "Components/SphereComponent.h"
 #include "Components/CapsuleComponent.h"
+#include "Sound/SoundBase.h"
+#include "Particles/ParticleSystem.h"
+#include "Kismet/GameplayStatics.h"
 
 // Sets default values
 AZombieEnemy::AZombieEnemy()
@@ -19,7 +22,7 @@ AZombieEnemy::AZombieEnemy()
 void AZombieEnemy::BeginPlay()
 {
 	Super::BeginPlay();
-	
+
 }
 
 // Called every frame
@@ -35,4 +38,11 @@ void AZombieEnemy::SetupPlayerInputComponent(UInputComponent* PlayerInputCompone
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
 
 }
+
+void AZombieEnemy::SelfDestruct()
+{
+	UGameplayStatics::SpawnEmitterAtLocation(GetWorld(), ExplosionVisualFX, GetActorTransform());
+	UGameplayStatics::PlaySoundAtLocation(this, ExplosionSoundFX, GetActorLocation());
+	Destroy();
+};
 

@@ -1,0 +1,16 @@
+// Fill out your copyright notice in the Description page of Project Settings.
+
+
+#include "SelfDestruction.h"
+#include "BehaviorTree/BlackboardComponent.h"
+#include "Enemies/MiniZombie/ZombieEnemy.h"
+#include "AIController.h"
+
+EBTNodeResult::Type USelfDestruction::ExecuteTask(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory)
+{
+	auto AIOwner = OwnerComp.GetAIOwner();
+	auto Zombie = Cast<class AZombieEnemy>(AIOwner->GetPawn());
+
+	Zombie->SelfDestruct();
+	return EBTNodeResult::Succeeded;
+};

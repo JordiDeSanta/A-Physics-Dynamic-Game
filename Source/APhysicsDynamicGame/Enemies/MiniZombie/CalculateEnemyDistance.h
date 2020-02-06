@@ -14,13 +14,13 @@ class APHYSICSDYNAMICGAME_API UCalculateEnemyDistance : public UBTService
 {
 	GENERATED_BODY()
 
+    virtual void TickNode(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory, float DeltaSeconds) override;
+
 public:
 
-	void TickNode(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory, float DeltaSeconds);
-
-    UPROPERTY(EditDefaultsOnly, Category = "Blackboard")
+    UPROPERTY(EditAnywhere, Category = "Blackboard")
         struct FBlackboardKeySelector EnemyKey;
 
-    UPROPERTY(EditDefaultsOnly, Category = "Blackboard")
+    UPROPERTY(EditAnywhere, Category = "Blackboard")
         struct FBlackboardKeySelector DistanceKey;
 };

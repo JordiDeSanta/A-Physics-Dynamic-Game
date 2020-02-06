@@ -53,3 +53,9 @@ void AZombieEnemy::SelfDestruct()
 	Destroy();
 };
 
+float AZombieEnemy::TakeDamage(float DamageAmount, struct FDamageEvent const& DamageEvent, class AController* EventInstigator, AActor* DamageCauser)
+{
+	Health -= DamageAmount;
+	return DamageAmount;
+};
+

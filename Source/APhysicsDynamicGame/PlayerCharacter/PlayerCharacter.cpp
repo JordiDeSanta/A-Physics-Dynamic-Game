@@ -37,7 +37,6 @@ APlayerCharacter::APlayerCharacter()
 float APlayerCharacter::TakeDamage(float DamageAmount, FDamageEvent const& DamageEvent, AController* EventInstigator, AActor* DamageCauser)
 {
 	Health -= DamageAmount;
-	UE_LOG(LogTemp, Warning, TEXT("Health: %f"), Health);
 	return DamageAmount;
 }
 
@@ -59,7 +58,7 @@ void APlayerCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCom
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
 
-	// set up gameplay key bindings
+	// set up gameplay key bindings.
 	check(PlayerInputComponent);
 
 	// Bind jump events

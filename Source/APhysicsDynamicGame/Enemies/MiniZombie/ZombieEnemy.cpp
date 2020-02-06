@@ -2,6 +2,7 @@
 
 
 #include "ZombieEnemy.h"
+#include "Components/SphereComponent.h"
 #include "Components/CapsuleComponent.h"
 
 // Sets default values
@@ -9,6 +10,8 @@ AZombieEnemy::AZombieEnemy()
 {
  	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
+
+	// Adjusting capsule settings.
 	GetCapsuleComponent()->SetCapsuleSize(34.f, 44.f);
 }
 

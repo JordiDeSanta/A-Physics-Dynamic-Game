@@ -4,7 +4,12 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
+#include "Sound/SoundBase.h"
+#include "Particles/ParticleSystemComponent.h"
 #include "ZombieEnemy.generated.h"
+
+class UParticleSystemComponent;
+class USoundBase;
 
 UCLASS()
 class APHYSICSDYNAMICGAME_API AZombieEnemy : public ACharacter
@@ -26,4 +31,9 @@ public:
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
+	UPROPERTY(EditDefaultsOnly, Category = "Explosion")
+		UParticleSystemComponent* ExplosionVisualFX = nullptr;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Explosion")
+		USoundBase* ExplosionSoundFX = nullptr;
 };

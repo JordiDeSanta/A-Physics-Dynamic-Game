@@ -40,15 +40,17 @@ void AZombieEnemy::SetupPlayerInputComponent(UInputComponent* PlayerInputCompone
 
 }
 
-void AZombieEnemy::SelfDestruct()
+void AZombieEnemy::SelfDestruct(bool bKilled)
 {
 	UGameplayStatics::SpawnEmitterAtLocation(GetWorld(), ExplosionVisualFX, GetActorTransform());
 	UGameplayStatics::PlaySoundAtLocation(this, ExplosionSoundFX, GetActorLocation());
 
 	auto PlayerCharacter = Cast<class APlayerCharacter>(GetWorld()->GetFirstPlayerController()->GetPawn());
 
-	// Applying damage to enemy.
-	UGameplayStatics::ApplyDamage(PlayerCharacter, Damage, GetController(), this, nullptr);
+	if (!bKilled)
+	{// Applying damage to enemy.
+		UGameplayStatics::ApplyDamage(PlayerCharacter, Damage, GetController(), this, nullptr);
+	};
 
 	Destroy();
 };
@@ -56,6 +58,12 @@ void AZombieEnemy::SelfDestruct()
 float AZombieEnemy::TakeDamage(float DamageAmount, struct FDamageEvent const& DamageEvent, class AController* EventInstigator, AActor* DamageCauser)
 {
 	Health -= DamageAmount;
+
+	if (Health <= 0.f)
+	{
+		SelfDestruct(true);
+	};
+
 	UE_LOG(LogTemp, Warning, TEXT("Health: %f"), Health);
 	return DamageAmount;
 };

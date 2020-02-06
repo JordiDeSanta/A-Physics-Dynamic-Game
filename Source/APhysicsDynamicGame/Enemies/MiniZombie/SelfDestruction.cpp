@@ -15,7 +15,7 @@ EBTNodeResult::Type USelfDestruction::ExecuteTask(UBehaviorTreeComponent& OwnerC
 	auto Zombie = Cast<class AZombieEnemy>(AIOwner->GetPawn());
 
 	// Calling zombie to SD in case of.. (Decorator).
-	Zombie->SelfDestruct();
+	Zombie->SelfDestruct(false);
 
 	return EBTNodeResult::Succeeded;
 };

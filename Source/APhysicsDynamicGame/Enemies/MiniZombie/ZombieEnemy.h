@@ -32,7 +32,7 @@ public:
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
 	UFUNCTION()
-		void SelfDestruct();
+		void SelfDestruct(bool bKilled);
 
 	UPROPERTY(EditDefaultsOnly, Category = "Explosion")
 		class UParticleSystem* ExplosionVisualFX = nullptr;

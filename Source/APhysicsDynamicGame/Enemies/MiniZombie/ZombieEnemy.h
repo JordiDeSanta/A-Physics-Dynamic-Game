@@ -34,4 +34,7 @@ public:
 
 	UPROPERTY(EditDefaultsOnly, Category = "Explosion")
 		class USoundBase* ExplosionSoundFX = nullptr;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Explosion")
+		float Damage = 40.f;
 };

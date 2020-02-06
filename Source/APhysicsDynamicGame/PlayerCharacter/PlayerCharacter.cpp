@@ -34,6 +34,13 @@ APlayerCharacter::APlayerCharacter()
 	Grapple->AttachToComponent(FirstPersonCameraComponent, FAttachmentTransformRules::SnapToTargetIncludingScale);
 };
 
+float APlayerCharacter::TakeDamage(float DamageAmount, FDamageEvent const& DamageEvent, AController* EventInstigator, AActor* DamageCauser)
+{
+	Health -= DamageAmount;
+	UE_LOG(LogTemp, Warning, TEXT("Health: %f"), Health);
+	return DamageAmount;
+}
+
 // Called when the game starts or when spawned
 void APlayerCharacter::BeginPlay()
 {

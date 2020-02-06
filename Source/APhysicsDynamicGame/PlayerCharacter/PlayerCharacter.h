@@ -15,9 +15,14 @@ public:
 	// Sets default values for this character's properties
 	APlayerCharacter();
 
+	virtual float TakeDamage(float DamageAmount, struct FDamageEvent const& DamageEvent, class AController* EventInstigator, AActor* DamageCauser) override;
+
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
+
+	UPROPERTY(BlueprintReadOnly, Category = "Health")
+	float Health = 100.f;
 
 public:	
 	// Called every frame

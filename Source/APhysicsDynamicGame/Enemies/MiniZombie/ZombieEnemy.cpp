@@ -7,6 +7,7 @@
 #include "Sound/SoundBase.h"
 #include "Particles/ParticleSystem.h"
 #include "Kismet/GameplayStatics.h"
+#include "PlayerCharacter/PlayerCharacter.h"
 
 // Sets default values
 AZombieEnemy::AZombieEnemy()
@@ -43,6 +44,12 @@ void AZombieEnemy::SelfDestruct()
 {
 	UGameplayStatics::SpawnEmitterAtLocation(GetWorld(), ExplosionVisualFX, GetActorTransform());
 	UGameplayStatics::PlaySoundAtLocation(this, ExplosionSoundFX, GetActorLocation());
+
+	auto PlayerCharacter = Cast<class APlayerCharacter>(GetWorld()->GetFirstPlayerController()->GetPawn());
+
+	// Applying damage to enemy.
+	UGameplayStatics::ApplyDamage(PlayerCharacter, Damage, GetController(), this, nullptr);
+
 	Destroy();
 };
 

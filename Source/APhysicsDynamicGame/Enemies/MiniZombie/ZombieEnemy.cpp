@@ -33,14 +33,7 @@ void AZombieEnemy::Tick(float DeltaTime)
 
 }
 
-// Called to bind functionality to input
-void AZombieEnemy::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
-{
-	Super::SetupPlayerInputComponent(PlayerInputComponent);
-
-}
-
-void AZombieEnemy::SelfDestruct(bool bKilled)
+void AZombieEnemy::Death(bool bKilled)
 {
 	UGameplayStatics::SpawnEmitterAtLocation(GetWorld(), ExplosionVisualFX, GetActorTransform());
 	UGameplayStatics::PlaySoundAtLocation(this, ExplosionSoundFX, GetActorLocation());
@@ -55,14 +48,5 @@ void AZombieEnemy::SelfDestruct(bool bKilled)
 	Destroy();
 };
 
-float AZombieEnemy::TakeDamage(float DamageAmount, struct FDamageEvent const& DamageEvent, class AController* EventInstigator, AActor* DamageCauser)
-{
-	if (Health <= 0.f)
-	{
-		SelfDestruct(true);
-	};
 
-	Health -= DamageAmount;
-	return DamageAmount;
-};
 

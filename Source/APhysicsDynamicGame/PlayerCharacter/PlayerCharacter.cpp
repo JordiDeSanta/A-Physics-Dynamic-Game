@@ -36,6 +36,11 @@ APlayerCharacter::APlayerCharacter()
 
 float APlayerCharacter::TakeDamage(float DamageAmount, FDamageEvent const& DamageEvent, AController* EventInstigator, AActor* DamageCauser)
 {
+	if (Health - DamageAmount <= 0.f)
+	{
+		DetachFromControllerPendingDestroy();
+	};
+
 	Health -= DamageAmount;
 	return DamageAmount;
 }

@@ -57,14 +57,12 @@ void AZombieEnemy::SelfDestruct(bool bKilled)
 
 float AZombieEnemy::TakeDamage(float DamageAmount, struct FDamageEvent const& DamageEvent, class AController* EventInstigator, AActor* DamageCauser)
 {
-	Health -= DamageAmount;
-
 	if (Health <= 0.f)
 	{
 		SelfDestruct(true);
 	};
 
-	UE_LOG(LogTemp, Warning, TEXT("Health: %f"), Health);
+	Health -= DamageAmount;
 	return DamageAmount;
 };
 

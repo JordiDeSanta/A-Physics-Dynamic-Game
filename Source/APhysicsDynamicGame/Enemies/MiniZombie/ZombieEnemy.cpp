@@ -17,6 +17,7 @@ AZombieEnemy::AZombieEnemy()
 
 	// Adjusting capsule settings.
 	GetCapsuleComponent()->SetCapsuleSize(34.f, 44.f);
+	Health = 40.f;
 }
 
 // Called when the game starts or when spawned

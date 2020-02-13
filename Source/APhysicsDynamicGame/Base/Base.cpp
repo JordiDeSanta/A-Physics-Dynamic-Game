@@ -4,13 +4,15 @@
 #include "Engine/World.h"
 #include "TimerManager.h"
 #include "Math/UnrealMathUtility.h"
+#include "Components/StaticMeshComponent.h"
 
 // Sets default values
 ABase::ABase()
 {
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
-
+	Mesh = CreateDefaultSubobject<UStaticMeshComponent>("Mesh");
+	SetRootComponent(Mesh);
 }
 
 // Called when the game starts or when spawned
@@ -42,6 +44,8 @@ float ABase::TakeDamage(float DamageAmount, struct FDamageEvent const& DamageEve
 	{
 		bEmptyShield = true; // Setting empty if the value is <= 0.
 	};
+
+	return BaseHealth + BaseShield;
 }
 
 void ABase::RestoreShield()

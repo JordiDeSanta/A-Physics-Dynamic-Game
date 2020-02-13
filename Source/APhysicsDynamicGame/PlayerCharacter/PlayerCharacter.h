@@ -4,7 +4,10 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
+#include "Base/Base.h"
 #include "PlayerCharacter.generated.h"
+
+class ABase;
 
 UCLASS()
 class APHYSICSDYNAMICGAME_API APlayerCharacter : public ACharacter
@@ -25,6 +28,9 @@ protected:
 		float Health = 100.f;
 
 public:	
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Player")
+	ABase* PlayerBase;
+
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 

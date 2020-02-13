@@ -30,13 +30,16 @@ public:
 	FTimerHandle RestoreShieldTimer;
 
 protected:
-	UPROPERTY(EditAnywhere, Category = "Health")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Mesh")
+		class UStaticMeshComponent* Mesh;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Health")
 		float BaseHealth = 1000.f;
 
-	UPROPERTY(EditAnywhere, Category = "Health")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Health")
 		float BaseShield = 500.f;
 
-	UPROPERTY(EditAnywhere, Category = "Health")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Health")
 		float RestoreQuantityPerSecond = 1.f;
 
 private: 

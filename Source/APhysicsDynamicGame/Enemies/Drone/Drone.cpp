@@ -7,8 +7,3 @@ ADrone::ADrone()
 {
 	Health = 20.f;
 };
-
-void ADrone::Death(bool bKilled)
-{
-
-};

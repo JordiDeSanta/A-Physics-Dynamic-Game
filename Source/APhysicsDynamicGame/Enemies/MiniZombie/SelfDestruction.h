@@ -16,4 +16,11 @@ class APHYSICSDYNAMICGAME_API USelfDestruction : public UBTTaskNode
 
 		EBTNodeResult::Type ExecuteTask(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory) override;
 
+public:
+	
+	UPROPERTY(EditAnywhere, Category = "Blackboard")
+		bool bBase = false;
+
+	UPROPERTY(EditAnywhere, Category = "Blackboard")
+		bool bKilled = false;
 };

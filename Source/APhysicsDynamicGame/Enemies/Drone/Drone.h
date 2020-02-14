@@ -13,9 +13,7 @@ UCLASS()
 class APHYSICSDYNAMICGAME_API ADrone : public ABaseEnemy
 {
 	GENERATED_BODY()
-	
+
 public:
 	ADrone();
-
-	void Death(bool bKilled) override;
 };

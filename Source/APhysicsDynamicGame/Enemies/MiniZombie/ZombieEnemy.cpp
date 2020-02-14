@@ -8,6 +8,7 @@
 #include "Particles/ParticleSystem.h"
 #include "Kismet/GameplayStatics.h"
 #include "PlayerCharacter/PlayerCharacter.h"
+#include "Base/Base.h"
 
 // Sets default values
 AZombieEnemy::AZombieEnemy()
@@ -34,7 +35,7 @@ void AZombieEnemy::Tick(float DeltaTime)
 
 }
 
-void AZombieEnemy::Death(bool bKilled)
+void AZombieEnemy::Death(bool bKilled, bool bBase)
 {
 	UGameplayStatics::SpawnEmitterAtLocation(GetWorld(), ExplosionVisualFX, GetActorTransform());
 	UGameplayStatics::PlaySoundAtLocation(this, ExplosionSoundFX, GetActorLocation());
@@ -44,6 +45,13 @@ void AZombieEnemy::Death(bool bKilled)
 	if (!bKilled)
 	{// Applying damage to enemy.
 		UGameplayStatics::ApplyDamage(PlayerCharacter, Damage, GetController(), this, nullptr);
+	};
+
+	auto PlayerBase = PlayerCharacter->PlayerBase;
+
+	if (bBase)
+	{// Applying damage to base.
+		UGameplayStatics::ApplyDamage(PlayerBase, Damage, GetController(), this, nullptr);
 	};
 
 	Destroy();

@@ -15,7 +15,8 @@ public:
 	// Sets default values for this character's properties
 	AZombieEnemy();
 
-	virtual void Death(bool bKilled) override;
+	UFUNCTION(BlueprintCallable, Category = "Death")
+	virtual void Death(bool bKilled, bool bBase) override;
 
 protected:
 	// Called when the game starts or when spawned

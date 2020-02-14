@@ -13,9 +13,10 @@ EBTNodeResult::Type USelfDestruction::ExecuteTask(UBehaviorTreeComponent& OwnerC
 	// Getting controller pawn.
 	auto AIOwner = OwnerComp.GetAIOwner();
 	auto Zombie = Cast<class AZombieEnemy>(AIOwner->GetPawn());
+	auto Blackboard = OwnerComp.GetBlackboardComponent();
 
 	// Calling zombie to SD in case of.. (Decorator).
-	Zombie->Death(false);
+	Zombie->Death(bKilled, bBase);
 
 	return EBTNodeResult::Succeeded;
 };

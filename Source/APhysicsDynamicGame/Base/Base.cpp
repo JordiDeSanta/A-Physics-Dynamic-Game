@@ -27,6 +27,7 @@ void ABase::BeginPlay()
 void ABase::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
+	UE_LOG(LogTemp, Warning, TEXT("Health: %f"), BaseShield);
 }
 
 float ABase::TakeDamage(float DamageAmount, struct FDamageEvent const& DamageEvent, class AController* EventInstigator, AActor* DamageCauser)

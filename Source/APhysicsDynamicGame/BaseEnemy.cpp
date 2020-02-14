@@ -29,14 +29,14 @@ float ABaseEnemy::TakeDamage(float DamageAmount, struct FDamageEvent const& Dama
 {
 	if (Health <= 0.f)
 	{
-		Death(true, false);
+		Death(false, false);
 	};
 
 	Health -= DamageAmount;
 	return DamageAmount;
 };
 
-void ABaseEnemy::Death(bool bKilled, bool bBase)
+void ABaseEnemy::Death(bool bDamagePlayer, bool bDamageBase)
 {
 	DetachFromControllerPendingDestroy();
 };

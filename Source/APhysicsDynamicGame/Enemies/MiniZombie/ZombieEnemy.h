@@ -16,7 +16,7 @@ public:
 	AZombieEnemy();
 
 	UFUNCTION(BlueprintCallable, Category = "Death")
-	virtual void Death(bool bKilled, bool bBase) override;
+	virtual void Death(bool bDamagePlayer, bool bDamageBase) override;
 
 protected:
 	// Called when the game starts or when spawned

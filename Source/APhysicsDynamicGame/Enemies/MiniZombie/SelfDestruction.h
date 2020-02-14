@@ -19,8 +19,8 @@ class APHYSICSDYNAMICGAME_API USelfDestruction : public UBTTaskNode
 public:
 	
 	UPROPERTY(EditAnywhere, Category = "Blackboard")
-		bool bBase = false;
+		bool bDamageBase = false;
 
 	UPROPERTY(EditAnywhere, Category = "Blackboard")
-		bool bKilled = false;
+		bool bDamagePlayer = false;
 };

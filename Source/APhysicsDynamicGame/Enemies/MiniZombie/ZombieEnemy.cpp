@@ -35,21 +35,21 @@ void AZombieEnemy::Tick(float DeltaTime)
 
 }
 
-void AZombieEnemy::Death(bool bKilled, bool bBase)
+void AZombieEnemy::Death(bool bDamagePlayer, bool bDamageBase)
 {
 	UGameplayStatics::SpawnEmitterAtLocation(GetWorld(), ExplosionVisualFX, GetActorTransform());
 	UGameplayStatics::PlaySoundAtLocation(this, ExplosionSoundFX, GetActorLocation());
 
 	auto PlayerCharacter = Cast<class APlayerCharacter>(GetWorld()->GetFirstPlayerController()->GetPawn());
 
-	if (!bKilled)
+	if (bDamagePlayer)
 	{// Applying damage to enemy.
 		UGameplayStatics::ApplyDamage(PlayerCharacter, Damage, GetController(), this, nullptr);
 	};
 
 	auto PlayerBase = PlayerCharacter->PlayerBase;
 
-	if (bBase)
+	if (bDamageBase)
 	{// Applying damage to base.
 		UGameplayStatics::ApplyDamage(PlayerBase, Damage, GetController(), this, nullptr);
 	};

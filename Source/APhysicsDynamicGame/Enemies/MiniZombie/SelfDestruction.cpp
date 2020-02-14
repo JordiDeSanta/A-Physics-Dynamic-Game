@@ -16,7 +16,7 @@ EBTNodeResult::Type USelfDestruction::ExecuteTask(UBehaviorTreeComponent& OwnerC
 	auto Blackboard = OwnerComp.GetBlackboardComponent();
 
 	// Calling zombie to SD in case of.. (Decorator).
-	Zombie->Death(bKilled, bBase);
+	Zombie->Death(bDamagePlayer, bDamageBase);
 
 	return EBTNodeResult::Succeeded;
 };

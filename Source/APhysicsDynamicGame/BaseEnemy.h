@@ -17,7 +17,7 @@ public:
 
 	virtual float TakeDamage(float DamageAmount, struct FDamageEvent const& DamageEvent, class AController* EventInstigator, AActor* DamageCauser) override;
 
-	virtual void Death(bool bKilled, bool bBase);
+	virtual void Death(bool bDamagePlayer, bool bDamageBase);
 
 protected:
 	// Called when the game starts or when spawned

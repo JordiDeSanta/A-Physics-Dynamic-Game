@@ -42,8 +42,10 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Health")
 		float RestoreQuantityPerSecond = 1.f;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Health")
+		float MaxShield = 500.f;
+
 private: 
-	float MaxShield = 500.f;
 
 	bool bEmptyShield = false;
 };

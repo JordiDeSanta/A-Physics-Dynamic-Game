@@ -26,5 +26,8 @@ public:
 	void SpawnEnemies();
 
 	UPROPERTY(EditAnywhere, Category = "Enemies")
-		TMap<TSubclassOf<class ABaseEnemy>, int32> Enemies;
+		TMap<int32, TSubclassOf<class ABaseEnemy>> EnemiesMap;
+
+	UPROPERTY(EditAnywhere, Category = "Enemies")
+		FBox SpawnBox;
 };

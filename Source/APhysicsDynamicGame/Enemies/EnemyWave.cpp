@@ -1,7 +1,8 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
-
 #include "EnemyWave.h"
+#include "Engine/World.h"
+#include "BaseEnemy.h"
 
 // Sets default values
 AEnemyWave::AEnemyWave()
@@ -28,11 +29,19 @@ void AEnemyWave::Tick(float DeltaTime)
 
 void AEnemyWave::SpawnEnemies()
 {
-	for (int i = 0; i >= Enemies.Num(); i++)
+	for (auto& Enemy : EnemiesMap)
 	{
-		GetWorld()->SpawnActor(
-			Enemies[0]
-		)
+		for (int32 i = 0; i < Enemy.Key; i++)
+		{
+			FVector RandomPoint = FMath::RandPointInBox(SpawnBox);
+
+			auto Spawned = GetWorld()->SpawnActor<ABaseEnemy>(
+				Enemy.Value
+			);
+
+			Spawned->SetActorRelativeLocation(RandomPoint);
+			Spawned->AttachToActor(this, FAttachmentTransformRules(EAttachmentRule::KeepRelative, false));
+		};
 	}
 }
 

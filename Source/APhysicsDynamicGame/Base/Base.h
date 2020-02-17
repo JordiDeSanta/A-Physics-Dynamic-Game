@@ -45,6 +45,9 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Health")
 		float MaxShield = 500.f;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Health")
+		float MaxHealth = 1000.f;
+
 private: 
 
 	bool bEmptyShield = false;

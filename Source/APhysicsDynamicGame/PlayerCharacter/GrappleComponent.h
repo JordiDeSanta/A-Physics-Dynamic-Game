@@ -6,7 +6,6 @@
 #include "Components/StaticMeshComponent.h"
 #include "GrappleComponent.generated.h"
 
-
 DECLARE_DYNAMIC_MULTICAST_DELEGATE(FShootGrapple);
 DECLARE_DYNAMIC_MULTICAST_DELEGATE(FResetGrapple);
 

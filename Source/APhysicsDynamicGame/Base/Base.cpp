@@ -27,12 +27,18 @@ void ABase::BeginPlay()
 void ABase::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
+	BaseHealth = FMath::Clamp(BaseHealth, 0.f, MaxHealth);
 
-	UE_LOG(LogTemp, Warning, TEXT("Health: %f, Shield:%f"), BaseHealth, BaseShield);
 }
 
 float ABase::TakeDamage(float DamageAmount, struct FDamageEvent const& DamageEvent, class AController* EventInstigator, AActor* DamageCauser)
 {
+	if (BaseHealth >= 0.f)
+	{
+		UE_LOG(LogTemp, Warning, TEXT("Game Over"));
+
+	}
+
 	if (bEmptyShield)
 	{
 		BaseHealth -= DamageAmount;	// Subtract health if the shield is empty.

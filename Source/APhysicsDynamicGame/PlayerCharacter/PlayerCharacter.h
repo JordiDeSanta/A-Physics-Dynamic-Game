@@ -28,6 +28,16 @@ protected:
 		float Health = 100.f;
 
 public:	
+	UFUNCTION(BlueprintCallable, Category = "PowerUp")
+	void SpeedUp(float Quantity, float Time);
+
+	// timer to speedup method (PU)
+	FTimerHandle SpeedUpTimer;
+	UFUNCTION()
+		void OnTimerEnd();
+
+	float BaseSpeed;
+
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Player")
 	ABase* PlayerBase;
 

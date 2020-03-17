@@ -51,8 +51,20 @@ float APlayerCharacter::TakeDamage(float DamageAmount, FDamageEvent const& Damag
 void APlayerCharacter::BeginPlay()
 {
 	Super::BeginPlay();
-	
+	BaseSpeed = GetCharacterMovement()->MaxWalkSpeed;
 }
+
+void APlayerCharacter::SpeedUp(float Quantity, float Time)
+{
+
+	GetCharacterMovement()->MaxWalkSpeed = BaseSpeed + Quantity;
+	GetWorld()->GetTimerManager().SetTimer(SpeedUpTimer, this, &APlayerCharacter::OnTimerEnd, Time, false);
+}
+
+void APlayerCharacter::OnTimerEnd()
+{
+	GetCharacterMovement()->MaxWalkSpeed = BaseSpeed;
+};
 
 void APlayerCharacter::Tick(float DeltaSeconds)
 {

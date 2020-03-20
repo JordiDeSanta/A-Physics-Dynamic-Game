@@ -28,15 +28,20 @@ protected:
 		float Health = 100.f;
 
 public:	
+	// PowerUps
 	UFUNCTION(BlueprintCallable, Category = "PowerUp")
 	void SpeedUp(float Quantity, float Time);
 
 	// timer to speedup method (PU)
 	FTimerHandle SpeedUpTimer;
 	UFUNCTION()
-		void OnTimerEnd();
+		void SpeedTimer();
 
 	float BaseSpeed;
+
+	/// Super powers
+	UFUNCTION(BlueprintCallable, Category = "SuperPower")
+		void SuperJump();
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Player")
 	ABase* PlayerBase;

@@ -10,6 +10,7 @@
 #include "GameFramework/PlayerController.h"
 #include "Components/PrimitiveComponent.h"
 #include "Kismet/KismetSystemLibrary.h"
+#include "Engine/World.h"
 
 // Sets default values
 APlayerCharacter::APlayerCharacter()
@@ -54,17 +55,18 @@ void APlayerCharacter::BeginPlay()
 	BaseSpeed = GetCharacterMovement()->MaxWalkSpeed;
 }
 
+
+/// Power ups
 void APlayerCharacter::SpeedUp(float Quantity, float Time)
 {
-
 	GetCharacterMovement()->MaxWalkSpeed = BaseSpeed + Quantity;
-	GetWorld()->GetTimerManager().SetTimer(SpeedUpTimer, this, &APlayerCharacter::OnTimerEnd, Time, false);
+	GetWorld()->GetTimerManager().SetTimer(SpeedUpTimer, this, &APlayerCharacter::SpeedTimer, Time, false);
 }
 
-void APlayerCharacter::OnTimerEnd()
+void APlayerCharacter::SpeedTimer()
 {
 	GetCharacterMovement()->MaxWalkSpeed = BaseSpeed;
-};
+}
 
 void APlayerCharacter::Tick(float DeltaSeconds)
 {
@@ -103,6 +105,13 @@ void APlayerCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCom
 	PlayerInputComponent->BindAction("ShootGrapple", IE_Pressed, this, &APlayerCharacter::ShootGrapple);
 	PlayerInputComponent->BindAction("ShootLaser", IE_Pressed, this, &APlayerCharacter::ShootLaser);
 }
+
+/// Super Powers
+void APlayerCharacter::SuperJump()
+{
+	LaunchCharacter(FVector(0.f, 0.f, 1000.f), true, true);
+};
+
 
 UCameraComponent* APlayerCharacter::GetCamera()
 {
